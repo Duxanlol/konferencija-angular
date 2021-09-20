@@ -1,0 +1,27 @@
+<div class="maindiv">
+  <mat-card>
+    <mat-card-title>Dodaj izvodjenje</mat-card-title>
+    <mat-card-content>
+      <form #form="ngForm" (ngSubmit)="form.valid  && dodajIzvodjenje(form)">
+
+        <div class="row">
+          <mat-form-field class="col justify-content-center" appearance="fill">
+            <mat-label>Broj mesta</mat-label>
+            <input matInput type="number" name="brojMesta" ngModel required>
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field class="col justify-content-center" appearance="fill">
+            <mat-label>Pocetak</mat-label>
+            <input matInput type="datetime-local" name="datum" ngModel required>
+          </mat-form-field>
+        </div>
+
+        <button type="submit" mat-raised-button color="primary">Dodaj</button>
+
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

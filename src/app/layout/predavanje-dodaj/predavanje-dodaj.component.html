@@ -1,0 +1,38 @@
+<div class="maindiv">
+  <mat-card>
+    <mat-card-title>Dodaj predavanje</mat-card-title>
+    <mat-card-content>
+      <form #form="ngForm" (ngSubmit)="form.valid  && dodajPredavanje(form)">
+
+        <div class="row">
+          <mat-form-field class="col justify-content-center" appearance="fill">
+            <mat-label>Predavac:</mat-label>
+            <mat-select [(ngModel)]="selectedItem" name="predavac">
+              <mat-option *ngFor="let predavac of predavaci" [value]="predavac">
+                {{predavac.imePrezime}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field class="col justify-content-center" appearance="fill">
+            <mat-label>Naziv</mat-label>
+            <input matInput type="text" name="naziv" ngModel pattern="[A-Z][A-Za-z0-9 ]+" required>
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field class="col justify-content-center" appearance="fill">
+            <mat-label>Opis</mat-label>
+            <textarea matInput type="text" name="opis" ngModel required cols="25" rows="5"></textarea>
+          </mat-form-field>
+        </div>
+
+        <button type="submit" mat-raised-button color="primary">Dodaj</button>
+
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

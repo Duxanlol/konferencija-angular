@@ -1,0 +1,24 @@
+<mat-card class="centered">
+  <mat-card-title>Register</mat-card-title>
+  <mat-card-content>
+    <form #form="ngForm" (ngSubmit)="form.valid && onRegister()">
+      <mat-form-field appearance="fill">
+        <mat-label>First name</mat-label>
+        <input matInput type="text" name="firstName" [(ngModel)]="osoba.ime" required pattern="[A-Z][a-z]+">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Last name</mat-label>
+        <input matInput type="text" name="lastName" [(ngModel)]="osoba.prezime" required pattern="[A-Z][a-z]+">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput type="text" name="email" [(ngModel)]="osoba.email" required pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" name="password" [(ngModel)]="osoba.password" required pattern="[a-zA-Z0-9]{1,8}">
+      </mat-form-field>
+      <button type="submit" mat-raised-button color="primary">Register</button>
+    </form>
+  </mat-card-content>
+</mat-card>

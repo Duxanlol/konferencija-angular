@@ -1,0 +1,59 @@
+<div class="maindiv">
+<mat-card>
+  <mat-card-title>Dodaj konferenciju</mat-card-title>
+  <mat-card-content>
+    <form #form="ngForm" (ngSubmit)="form.valid  && dodajKonferenciju(form)">
+
+      <div class="row">
+        <mat-form-field class="col justify-content-center" appearance="fill">
+          <mat-label>Naziv</mat-label>
+          <input matInput type="text" name="naziv" ngModel pattern="[A-Z][A-Za-z0-9 ]+" required>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field class="col justify-content-center" appearance="fill">
+          <mat-label>Pocetak</mat-label>
+          <input matInput type="date" name="pocetak" ngModel required>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field class="col justify-content-center" appearance="fill">
+          <mat-label>Kraj</mat-label>
+          <input matInput type="date" name="kraj" ngModel required>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field class="col justify-content-center" appearance="fill">
+          <mat-label>Cena $</mat-label>
+          <input matInput type="number" name="cena" ngModel required>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field class="col justify-content-center" appearance="fill">
+          <mat-label>Opis</mat-label>
+          <textarea matInput type="text" name="opis" ngModel required cols="25" rows="5"></textarea>
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field class="col justify-content-center" appearance="fill">
+          <mat-label>Organizator:</mat-label>
+          <mat-select [(ngModel)]="selectedItem" name="organizator">
+            <mat-option *ngFor="let organizator of organizatori" [value]="organizator">
+              {{organizator.imePrezime}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+
+      <button type="submit" mat-raised-button color="primary">Dodaj</button>
+
+
+    </form>
+  </mat-card-content>
+</mat-card>
+</div>

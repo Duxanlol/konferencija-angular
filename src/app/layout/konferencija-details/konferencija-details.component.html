@@ -1,0 +1,88 @@
+<div class="main-div">
+  <table class="mat-table">
+    <ng-container matColumnDef="naziv">
+      <th mat-header-cell> Naziv</th>
+    </ng-container>
+    <ng-container matColumnDef="opis">
+      <th mat-header-cell> Opis</th>
+    </ng-container>
+    <ng-container matColumnDef="pocetak">
+      <th mat-header-cell> Pocetak</th>
+    </ng-container>
+    <ng-container matColumnDef="kraj">
+      <th mat-header-cell> Kraj</th>
+    </ng-container>
+
+    <tr class="mat-row">
+      <td class="mat-cell">{{konferencija.naziv}}</td>
+      <td class="mat-cell">{{konferencija.opis}}</td>
+      <td class="mat-cell">{{konferencija.pocetak}}</td>
+      <td class="mat-cell">{{konferencija.kraj}}</td>
+    </tr>
+
+  </table>
+  <form #form="ngForm" (ngSubmit)="form.valid  && rezervisi(form)">
+    <mat-card *ngFor="let predavanje of konferencija.predavanja" style="border: 3px solid #cecece; padding: 10px">
+      <mat-card-title>{{predavanje.naziv}}</mat-card-title>
+      <mat-card-content>
+
+        <h3>{{predavanje.predavac.imePrezime}}</h3>
+        <h4>{{predavanje.opis}}</h4>
+        <button (click)="obrisiPredavanje(predavanje)" *ngIf="authService.isAdmin()" color="warn" mat-stroked-button>
+          Obrisi izvodjenje
+        </button>
+        <h2>Izvodjenja</h2>
+        <button (click)="dodajIzvodjenje(predavanje)" *ngIf="authService.isAdmin()" color="primary" mat-stroked-button>
+          Dodaj izvodjenje
+        </button>
+
+
+        <mat-radio-group name="{{predavanje.id.toString()}}" ngModel required>
+          <table class="mat-table" class="small-table">
+            <ng-container matColumnDef="naziv">
+              <th mat-header-cell> Broj preostalih mesta</th>
+            </ng-container>
+            <ng-container matColumnDef="opis">
+              <th mat-header-cell> Vreme</th>
+            </ng-container>
+            <ng-container *ngIf="authService.isUser()" matColumnDef="rezervisi">
+              <th mat-header-cell> Rezervisi</th>
+            </ng-container>
+
+
+            <tr *ngFor="let izvodjenje of predavanje.izvodjenja" class="mat-row">
+
+              <td>{{izvodjenje.brojMesta}}</td>
+              <td>{{izvodjenje.datum | date : 'short'}}</td>
+              <td>
+                <button (click)="obrisiIzvodjenje(izvodjenje, predavanje)" *ngIf="authService.isAdmin()" color="warn"
+                        mat-stroked-button>Obrisi izvodjenje
+                </button>
+              </td>
+              <td>
+                <mat-radio-button *ngIf="authService.isUser()" [value]="izvodjenje" name="{{predavanje.id.toString()}}"
+                                  ngModel></mat-radio-button>
+              </td>
+
+            </tr>
+
+          </table>
+        </mat-radio-group>
+
+
+      </mat-card-content>
+    </mat-card>
+    <button *ngIf="authService.isUser()" color="primary" mat-stroked-button>Rezervisi</button>
+  </form>
+  <button (click)="dodajPredavanje()" *ngIf="authService.isAdmin()" color="primary" mat-stroked-button>Dodaj
+    predavanje
+  </button>
+  <button (click)="obrisiKonferenciju()" *ngIf="authService.isAdmin()" color="warn" mat-stroked-button>Obrisi
+    konferenciju
+  </button>
+
+
+</div>
+
+
+

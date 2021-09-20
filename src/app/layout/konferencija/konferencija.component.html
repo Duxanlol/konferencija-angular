@@ -1,0 +1,31 @@
+<div class="container centered">
+  <table mat-table [dataSource]="konferencije">
+    <ng-container matColumnDef="naziv">
+      <th mat-header-cell *matHeaderCellDef> Naziv </th>
+      <td mat-cell *matCellDef="let konf"> {{konf.naziv}} </td>
+    </ng-container>
+    <ng-container matColumnDef="opis">
+      <th mat-header-cell *matHeaderCellDef> Opis </th>
+      <td mat-cell *matCellDef="let konf"> {{konf.opis}} </td>
+    </ng-container>
+    <ng-container matColumnDef="pocetak">
+      <th mat-header-cell *matHeaderCellDef> Pocetak </th>
+      <td mat-cell *matCellDef="let konf"> {{konf.pocetak}} </td>
+    </ng-container>
+    <ng-container matColumnDef="kraj">
+      <th mat-header-cell *matHeaderCellDef> Kraj </th>
+      <td mat-cell *matCellDef="let konf"> {{konf.kraj}} </td>
+    </ng-container>
+    <ng-container matColumnDef="organizator">
+      <th mat-header-cell *matHeaderCellDef> Organizator </th>
+      <td mat-cell *matCellDef="let konf"> {{konf.organizator.imePrezime}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"
+        [routerLink]="['/konferencija/', myRowData.id]"></tr>
+  </table>
+  <a *ngIf="authService.isAdmin()"  [routerLink]="['/','dodaj-konferenciju']"
+     [routerLinkActive]="['active']">Dodaj konferenciju</a>
+
+</div>

@@ -1,0 +1,30 @@
+<div *ngIf="karte.length == 0 || karte == undefined">
+  <h1>Nemate karata.</h1>
+</div>
+
+<mat-card *ngFor="let karta of karte" style="border: 3px solid #cecece; padding: 10px">
+  <mat-card-title>{{karta.konferencija.naziv}}</mat-card-title>
+  <mat-card-content>
+    <h3>{{karta.konferencija.pocetak}} - {{karta.konferencija.kraj}} , ${{karta.cena}}</h3>
+    <h3>{{karta.konferencija.opis}}</h3>
+
+
+
+
+    <table class="mat-table" class="small-table">
+      <ng-container matColumnDef="naziv">
+        <th mat-header-cell> Naziv</th>
+      </ng-container>
+      <ng-container matColumnDef="opis">
+        <th mat-header-cell> Vreme</th>
+      </ng-container>
+
+      <tr *ngFor="let mesto of karta.mesta">
+        <td>{{mesto.izvodjenje.predavanje.naziv}}</td>
+        <td>{{mesto.izvodjenje.datum | date :'short'}}</td>
+      </tr>
+    </table>
+
+
+  </mat-card-content>
+</mat-card>
